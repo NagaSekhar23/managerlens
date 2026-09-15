@@ -12,6 +12,13 @@ type KnowledgeSource = {
   relevance_score: number;
 };
 
+type CompanyDataSource = {
+  tool: string;
+  employee_id: string;
+  employee_name: string;
+  summary: string;
+};
+
 type AnalysisResult = {
   situation_summary: string;
   situation_type: string;
@@ -25,7 +32,20 @@ type AnalysisResult = {
   risks: string[];
   reasoning_basis: string;
   knowledge_used: KnowledgeSource[];
+  company_data_used: CompanyDataSource[];
 };
+
+const COMPANY_TOOL_LABELS: Record<string, string> = {
+  get_employee: "Employee Record",
+  get_jira_activity: "Jira Activity",
+  get_github_activity: "GitHub Activity",
+  get_one_on_ones: "1:1 Notes",
+  get_feedback_history: "Feedback History",
+};
+
+function companyToolLabel(tool: string): string {
+  return COMPANY_TOOL_LABELS[tool] ?? tool;
+}
 
 type Status = "idle" | "loading" | "success" | "error";
 
@@ -107,11 +127,28 @@ function ResultSection({
   );
 }
 
+function ManagerInputSection({ text }: { text: string }) {
+  return (
+    <div className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+      <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+        Manager&apos;s Input
+      </h3>
+      <p className="mb-3 text-xs text-zinc-400 dark:text-zinc-500">
+        Exactly what you described — everything below is built from this, general guidance, and
+        (when an employee is named) company evidence retrieved for them.
+      </p>
+      <blockquote className="whitespace-pre-wrap border-l-2 border-zinc-300 pl-3 text-sm text-zinc-700 dark:border-zinc-700 dark:text-zinc-300">
+        {text}
+      </blockquote>
+    </div>
+  );
+}
+
 function KnowledgeUsedSection({ sources }: { sources: KnowledgeSource[] }) {
   return (
     <div className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
       <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-        Knowledge Used
+        Management Guidance
       </h3>
       <p className="mb-3 text-xs text-zinc-400 dark:text-zinc-500">
         General management guidance retrieved for this situation — not facts about your employee,
@@ -146,8 +183,65 @@ function KnowledgeUsedSection({ sources }: { sources: KnowledgeSource[] }) {
   );
 }
 
+function CompanyEvidenceSection({ sources }: { sources: CompanyDataSource[] }) {
+  return (
+    <div className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+      <h3 className="mb-1 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+        Company Evidence
+      </h3>
+      <p className="mb-3 text-xs text-zinc-400 dark:text-zinc-500">
+        Records retrieved directly from company systems (Jira, GitHub, 1:1 notes, feedback
+        history) for the employee named in your situation — observed evidence, not something you
+        typed and not general guidance.
+      </p>
+      {sources.length === 0 ? (
+        <p className="text-sm text-zinc-400 dark:text-zinc-500">
+          No company or employee evidence was retrieved for this analysis. This happens either
+          because no specific employee was named in the situation, or because the tools found
+          nothing usable to check. The analysis above relies on the situation and general
+          guidance alone.
+        </p>
+      ) : (
+        <ul className="space-y-3">
+          {sources.map((source, i) => {
+            const isEmpty = source.summary.toLowerCase().startsWith("no records found");
+            return (
+              <li
+                key={i}
+                className="rounded-md border border-zinc-100 bg-zinc-50 p-3 dark:border-zinc-800 dark:bg-zinc-900"
+              >
+                <div className="mb-1 flex flex-wrap items-center justify-between gap-2">
+                  <span className="text-sm font-medium text-zinc-800 dark:text-zinc-200">
+                    {companyToolLabel(source.tool)}
+                  </span>
+                  <span className="shrink-0 rounded-full bg-zinc-200 px-2 py-0.5 text-xs font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-300">
+                    {source.employee_name}
+                  </span>
+                </div>
+                <p
+                  className={
+                    isEmpty
+                      ? "text-sm italic text-zinc-400 dark:text-zinc-500"
+                      : "text-sm text-zinc-600 dark:text-zinc-400"
+                  }
+                >
+                  {source.summary}
+                </p>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      <p className="mt-4 text-xs italic text-zinc-400 dark:text-zinc-500">
+        Company data shown here is simulated demo data.
+      </p>
+    </div>
+  );
+}
+
 export default function Home() {
   const [situation, setSituation] = useState("");
+  const [submittedSituation, setSubmittedSituation] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [result, setResult] = useState<AnalysisResult | null>(null);
   const [errorMessage, setErrorMessage] = useState("");
@@ -162,6 +256,7 @@ export default function Home() {
     setStatus("loading");
     setErrorMessage("");
     setResult(null);
+    setSubmittedSituation(trimmed);
 
     let res: Response;
     try {
@@ -215,7 +310,7 @@ export default function Home() {
           className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950"
         >
           <label htmlFor="situation" className="mb-2 block text-sm font-medium text-zinc-700 dark:text-zinc-300">
-            What's going on?
+            What&apos;s going on?
           </label>
           <textarea
             id="situation"
@@ -256,7 +351,12 @@ export default function Home() {
 
         {status === "success" && result && (
           <div className="flex flex-col gap-5">
+            <ManagerInputSection text={submittedSituation} />
+
             <div className="rounded-lg border border-zinc-200 bg-white p-5 dark:border-zinc-800 dark:bg-zinc-950">
+              <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+                ManagerLens Analysis
+              </h3>
               <div className="mb-3 flex flex-wrap items-center gap-3">
                 <span className="rounded-full bg-zinc-100 px-3 py-1 text-sm font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">
                   {situationTypeLabel(result.situation_type)}
@@ -309,6 +409,7 @@ export default function Home() {
               emptyLabel="No risks flagged."
             />
 
+            <CompanyEvidenceSection sources={result.company_data_used} />
             <KnowledgeUsedSection sources={result.knowledge_used} />
           </div>
         )}

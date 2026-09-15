@@ -1,0 +1,102 @@
+[
+  {
+    "employee_id": "EMP001",
+    "issue_id": "PLAT-101",
+    "title": "Implement rate limiter for ingestion API",
+    "status": "Done",
+    "due_date": "2026-06-15",
+    "completed_date": "2026-06-28",
+    "blocked_by": "Waiting on Data Platform team to finalize API contract (DATA-482)",
+    "project": "Platform"
+  },
+  {
+    "employee_id": "EMP001",
+    "issue_id": "PLAT-114",
+    "title": "Add retry logic for webhook delivery",
+    "status": "Done",
+    "due_date": "2026-07-10",
+    "completed_date": "2026-07-22",
+    "blocked_by": "Requirements changed mid-sprint after PM revised the webhook spec",
+    "project": "Platform"
+  },
+  {
+    "employee_id": "EMP001",
+    "issue_id": "PLAT-130",
+    "title": "Migrate config service to v2 schema",
+    "status": "Done",
+    "due_date": "2026-08-01",
+    "completed_date": "2026-08-02",
+    "blocked_by": null,
+    "project": "Platform"
+  },
+  {
+    "employee_id": "EMP001",
+    "issue_id": "PLAT-142",
+    "title": "Fix flaky integration test suite",
+    "status": "In Progress",
+    "due_date": "2026-09-20",
+    "completed_date": null,
+    "blocked_by": null,
+    "project": "Platform"
+  },
+  {
+    "employee_id": "EMP002",
+    "issue_id": "ML-201",
+    "title": "Build feature pipeline for churn model",
+    "status": "Done",
+    "due_date": "2026-05-01",
+    "completed_date": "2026-04-28",
+    "blocked_by": null,
+    "project": "Applied ML"
+  },
+  {
+    "employee_id": "EMP002",
+    "issue_id": "ML-215",
+    "title": "Retrain recommendation model v3",
+    "status": "Done",
+    "due_date": "2026-06-15",
+    "completed_date": "2026-06-12",
+    "blocked_by": null,
+    "project": "Applied ML"
+  },
+  {
+    "employee_id": "EMP002",
+    "issue_id": "ML-229",
+    "title": "Add model monitoring dashboards",
+    "status": "Done",
+    "due_date": "2026-07-30",
+    "completed_date": "2026-07-29",
+    "blocked_by": null,
+    "project": "Applied ML"
+  },
+  {
+    "employee_id": "EMP002",
+    "issue_id": "ML-241",
+    "title": "Evaluate embedding model upgrade",
+    "status": "In Progress",
+    "due_date": "2026-09-30",
+    "completed_date": null,
+    "blocked_by": null,
+    "project": "Applied ML"
+  },
+  {
+    "employee_id": "EMP003",
+    "issue_id": "PLAT-150",
+    "title": "Onboarding: fix small logging bug",
+    "status": "Done",
+    "due_date": "2026-08-20",
+    "completed_date": "2026-08-19",
+    "blocked_by": null,
+    "project": "Platform"
+  },
+  {
+    "employee_id": "EMP003",
+    "issue_id": "PLAT-158",
+    "title": "Add unit tests for auth module",
+    "status": "In Progress",
+    "due_date": "2026-09-25",
+    "completed_date": null,
+    "blocked_by": null,
+    "project": "Platform"
+  }
+]

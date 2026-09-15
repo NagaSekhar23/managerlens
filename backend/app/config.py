@@ -26,9 +26,21 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     gemini_model: str = "gemini-3.6-flash"
     gemini_embedding_model: str = "gemini-embedding-001"
-    # Applies to every outbound Gemini call (analysis, embedding, evaluation judge) so a
+    # Applies to every outbound Gemini call (embedding, evaluation judge) so a
     # slow/unresponsive upstream can't hang a request indefinitely.
     gemini_timeout_seconds: float = 30.0
+
+    # Groq is the reasoning/tool-calling provider (see groq_client.py). Gemini remains
+    # configured above because RAG embeddings stay on Gemini — Groq has no embeddings API.
+    # groq_api_key has no default and must be supplied by the environment, same as
+    # gemini_api_key.
+    groq_api_key: str = ""
+    groq_model: str = "openai/gpt-oss-120b"
+    # Applies to every outbound Groq call (tool-calling and structured analysis).
+    groq_timeout_seconds: float = 30.0
+    # Hard ceiling on company-data tool calls per analysis request (see run_tool_loop) —
+    # bounds cost/latency even if the model tries to call tools repeatedly.
+    max_tool_calls_per_analysis: int = 5
 
     # A JSON array in the environment, e.g. CORS_ORIGINS=["https://managerlens.example.com"].
     # Never defaults to "*" — an explicit allowlist is required for any non-local deployment.

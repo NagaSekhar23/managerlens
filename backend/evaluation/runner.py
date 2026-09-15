@@ -1,13 +1,15 @@
 """CLI entry point: python -m evaluation.runner [--no-judge] [--limit N]
 
 Runs every scenario in the golden + red-team dataset through the real
-ManagerLens analysis pipeline (Gemini + retrieval), scores it with the
-deterministic checks plus (by default) the LLM judge, and writes a JSON
-report to evaluation/reports/ (read back by GET /api/evaluation).
+ManagerLens analysis pipeline (Groq for reasoning/tool-calling, Gemini for
+embeddings/retrieval), scores it with the deterministic checks plus (by
+default) the LLM judge (Gemini), and writes a JSON report to
+evaluation/reports/ (read back by GET /api/evaluation).
 
-Requires a configured GEMINI_API_KEY and a populated knowledge base — this
-is the "full AI evaluation," not a fast unit test. See evaluation/tests/ for
-the mocked, no-network tests of the evaluator itself.
+Requires a configured GROQ_API_KEY and GEMINI_API_KEY, plus a populated
+knowledge base — this is the "full AI evaluation," not a fast unit test. See
+backend/tests/test_evaluation_*.py for the mocked, no-network tests of the
+evaluator itself.
 """
 
 import argparse

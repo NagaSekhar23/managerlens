@@ -2,6 +2,8 @@ from unittest.mock import patch
 
 import pytest
 
+import app.services.analysis_service as analysis_service_module
+import app.services.groq_client as groq_client_module
 from app.schemas.analysis import GeminiAnalysisPayload
 from app.services.analysis_service import analyze_situation
 from app.services.errors import KnowledgeRetrievalError, LLMRequestError
@@ -98,3 +100,12 @@ class TestKnowledgeBaseFailure:
         assert result.knowledge_used == []
         _, kwargs = mock_generate.call_args
         assert "no relevant guidance was found" in kwargs["prompt"].lower()
+
+
+class TestUsesGroqForReasoning:
+    """Confirms analyze_situation's reasoning/tool-calling calls are wired to the Groq
+    client, not Gemini — this is the actual provider swap this migration makes."""
+
+    def test_generate_structured_and_run_tool_loop_come_from_groq_client(self):
+        assert analysis_service_module.generate_structured is groq_client_module.generate_structured
+        assert analysis_service_module.run_tool_loop is groq_client_module.run_tool_loop

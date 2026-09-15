@@ -1,0 +1,65 @@
+[
+  {
+    "employee_id": "EMP001",
+    "repository": "windmill/platform-services",
+    "pull_request": 482,
+    "title": "Add rate limiter middleware",
+    "opened_at": "2026-06-10",
+    "merged_at": "2026-06-27",
+    "review_count": 4
+  },
+  {
+    "employee_id": "EMP001",
+    "repository": "windmill/platform-services",
+    "pull_request": 501,
+    "title": "Webhook retry logic",
+    "opened_at": "2026-07-05",
+    "merged_at": "2026-07-21",
+    "review_count": 3
+  },
+  {
+    "employee_id": "EMP001",
+    "repository": "windmill/platform-services",
+    "pull_request": 518,
+    "title": "Config v2 migration",
+    "opened_at": "2026-07-30",
+    "merged_at": "2026-08-02",
+    "review_count": 2
+  },
+  {
+    "employee_id": "EMP002",
+    "repository": "windmill/ml-platform",
+    "pull_request": 310,
+    "title": "Churn feature pipeline",
+    "opened_at": "2026-04-20",
+    "merged_at": "2026-04-27",
+    "review_count": 2
+  },
+  {
+    "employee_id": "EMP002",
+    "repository": "windmill/ml-platform",
+    "pull_request": 333,
+    "title": "Recsys model v3 retrain",
+    "opened_at": "2026-06-05",
+    "merged_at": "2026-06-11",
+    "review_count": 2
+  },
+  {
+    "employee_id": "EMP002",
+    "repository": "windmill/ml-platform",
+    "pull_request": 350,
+    "title": "Model monitoring dashboards",
+    "opened_at": "2026-07-20",
+    "merged_at": "2026-07-28",
+    "review_count": 1
+  },
+  {
+    "employee_id": "EMP003",
+    "repository": "windmill/platform-services",
+    "pull_request": 520,
+    "title": "Fix logging bug in auth middleware",
+    "opened_at": "2026-08-15",
+    "merged_at": "2026-08-19",
+    "review_count": 3
+  }
+]

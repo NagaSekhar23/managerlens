@@ -1,0 +1,44 @@
+[
+  {
+    "employee_id": "EMP001",
+    "date": "2026-06-30",
+    "feedback_type": "manager",
+    "summary": "Two recent deadlines were missed. Need to understand the root cause before the next planning cycle."
+  },
+  {
+    "employee_id": "EMP001",
+    "date": "2026-07-25",
+    "feedback_type": "peer",
+    "summary": "Jordan communicated the webhook spec change clearly to the team and helped two other engineers adjust their work accordingly."
+  },
+  {
+    "employee_id": "EMP001",
+    "date": "2026-08-05",
+    "feedback_type": "manager",
+    "summary": "After reviewing the timeline, both delays were caused by external blockers (the Data Platform API contract and a PM spec change) that Jordan flagged proactively. Work quality remains high."
+  },
+  {
+    "employee_id": "EMP002",
+    "date": "2026-05-10",
+    "feedback_type": "manager",
+    "summary": "Delivered the churn pipeline three days early with thorough test coverage."
+  },
+  {
+    "employee_id": "EMP002",
+    "date": "2026-06-20",
+    "feedback_type": "peer",
+    "summary": "Priya's code review comments on the recsys retrain caught a data leakage issue before launch."
+  },
+  {
+    "employee_id": "EMP002",
+    "date": "2026-07-30",
+    "feedback_type": "performance_review",
+    "summary": "Consistently exceeds expectations. Recommended for the staff engineer track."
+  },
+  {
+    "employee_id": "EMP003",
+    "date": "2026-08-20",
+    "feedback_type": "manager",
+    "summary": "First bug fix merged smoothly during onboarding week. Not enough data yet to assess broader performance."
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "employee_id": "EMP001",
+    "name": "Jordan Alvarez",
+    "role": "Software Engineer",
+    "team": "Platform",
+    "manager": "Sam Rivera",
+    "start_date": "2024-02-12"
+  },
+  {
+    "employee_id": "EMP002",
+    "name": "Priya Natarajan",
+    "role": "ML Engineer",
+    "team": "Applied ML",
+    "manager": "Sam Rivera",
+    "start_date": "2023-06-05"
+  },
+  {
+    "employee_id": "EMP003",
+    "name": "Casey Kim",
+    "role": "Software Engineer",
+    "team": "Platform",
+    "manager": "Sam Rivera",
+    "start_date": "2026-08-01"
+  }
+]

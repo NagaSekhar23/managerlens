@@ -1,0 +1,44 @@
+[
+  {
+    "employee_id": "EMP001",
+    "date": "2026-06-20",
+    "topics": ["rate limiter progress", "blocker with Data Platform team"],
+    "concerns": ["Waiting on DATA-482 API contract before finishing the rate limiter"],
+    "manager_notes": "Jordan flagged the Data Platform dependency two weeks before the deadline and proposed a temporary workaround. The delay looks external, not effort-related."
+  },
+  {
+    "employee_id": "EMP001",
+    "date": "2026-07-15",
+    "topics": ["webhook retry logic", "shifting requirements"],
+    "concerns": ["PM changed the webhook spec after the sprint started, requiring rework"],
+    "manager_notes": "Jordan raised the scope change proactively and re-estimated the work. Kept me informed throughout rather than going quiet."
+  },
+  {
+    "employee_id": "EMP001",
+    "date": "2026-08-25",
+    "topics": ["upcoming flaky test suite work", "career growth"],
+    "concerns": [],
+    "manager_notes": "Jordan seems confident heading into Q3 planning. No concerns raised this session."
+  },
+  {
+    "employee_id": "EMP002",
+    "date": "2026-05-05",
+    "topics": ["churn model results", "mentoring the new hire"],
+    "concerns": [],
+    "manager_notes": "Priya delivered early and has started mentoring Casey. Strong quarter so far."
+  },
+  {
+    "employee_id": "EMP002",
+    "date": "2026-07-01",
+    "topics": ["recsys retrain results", "career growth toward staff track"],
+    "concerns": [],
+    "manager_notes": "Consistently ships ahead of schedule with high quality. Discussed staff engineer track."
+  },
+  {
+    "employee_id": "EMP003",
+    "date": "2026-08-10",
+    "topics": ["onboarding", "team introductions"],
+    "concerns": ["Still getting familiar with the codebase"],
+    "manager_notes": "First one-on-one since joining. Too early to assess performance trends either way."
+  }
+]

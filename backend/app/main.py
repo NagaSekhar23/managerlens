@@ -78,15 +78,15 @@ app.include_router(evaluation.router)
 @app.get("/health")
 def health_check():
     """Liveness check: is the process up? Deliberately does not touch the database or
-    Gemini — those are checked by /health/ready — so it stays fast and cheap for
-    orchestrators that poll it frequently."""
+    any LLM provider — those are checked by /health/ready — so it stays fast and cheap
+    for orchestrators that poll it frequently."""
     return {"status": "ok", "service": settings.app_name, "environment": settings.environment}
 
 
 @app.get("/health/ready")
 def readiness_check():
     """Readiness check: can this instance actually serve traffic? Verifies the database
-    is reachable. Does not call Gemini (that would cost quota on every poll)."""
+    is reachable. Does not call Groq or Gemini (that would cost quota on every poll)."""
     try:
         with engine.connect() as conn:
             conn.execute(text("SELECT 1"))

@@ -1,10 +1,13 @@
 """Pydantic schemas for POST /api/analyze.
 
-`GeminiAnalysisPayload` is exactly what we ask Gemini to produce as
-structured output. `AnalysisResult` extends it with `knowledge_used`, which
-is populated by our own retrieval code — never by Gemini — because letting
-the model fill in its own "sources" would defeat the point of grounding it
-in real, retrieved evidence.
+`GeminiAnalysisPayload` is exactly what the reasoning provider's structured-output
+call (currently Groq — see `groq_client.generate_structured`) is asked to produce.
+The class name predates the Groq migration and was kept as-is to avoid a broad
+rename across schemas/tests/evaluation. `AnalysisResult` extends it with
+`knowledge_used` and `company_data_used`, which are populated by our own
+retrieval/tool-calling code — never by the model itself — because letting the
+model fill in its own "sources" would defeat the point of grounding it in real,
+retrieved evidence.
 """
 
 from typing import Literal
@@ -87,8 +90,25 @@ class KnowledgeSource(BaseModel):
     )
 
 
+class CompanyDataSource(BaseModel):
+    """One piece of observed company evidence used as input — a compact, human-readable
+    summary of what a tool actually returned, never the raw record dump."""
+
+    tool: str = Field(..., description="Which company-data tool produced this evidence, e.g. get_jira_activity.")
+    employee_id: str = Field(..., description="The employee this evidence is about.")
+    employee_name: str = Field(..., description="Display name of the employee this evidence is about.")
+    summary: str = Field(
+        ...,
+        description="Concise, human-readable summary of what the tool actually returned (e.g. specific issue ids, dates, or note excerpts) — never invented.",
+    )
+
+
 class AnalysisResult(GeminiAnalysisPayload):
     knowledge_used: list[KnowledgeSource] = Field(
         default_factory=list,
         description="Retrieved general management guidance used as supporting evidence, if any was relevant.",
+    )
+    company_data_used: list[CompanyDataSource] = Field(
+        default_factory=list,
+        description="Observed company-data evidence (Jira, GitHub, 1:1s, feedback) retrieved for the employee identified in the situation, if any.",
     )

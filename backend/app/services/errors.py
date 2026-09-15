@@ -24,3 +24,9 @@ class KnowledgeRetrievalError(Exception):
     may choose to degrade gracefully (skip retrieval, proceed without evidence) rather than
     fail the whole request, since RAG evidence is a supporting input, not a hard dependency.
     """
+
+
+class EmployeeNotFoundError(Exception):
+    """Raised when a company-data lookup is requested for an employee_id that doesn't exist
+    in the mock company dataset. Callers should handle this gracefully rather than crash the
+    analysis request."""

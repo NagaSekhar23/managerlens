@@ -1,8 +1,9 @@
 """Deterministic, rule-based checks against an AnalysisResult.
 
 These are regex/heuristic checks, not ML — intentionally so. They're the
-part of the evaluation that never depends on Gemini being available, never
-costs an API call, and always gives the same answer for the same input.
+part of the evaluation that never depends on Groq or Gemini being
+available, never costs an API call, and always gives the same answer for
+the same input.
 The LLM judge (judges.py) is a supplementary signal on top of these, not a
 replacement for them.
 
