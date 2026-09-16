@@ -10,8 +10,6 @@ This is a portfolio project. It's a working full-stack application, not a slide 
 tool-calling against a real (if simulated) evidence store, real RAG over a real pgvector
 database, and a real evaluation harness that scores its own output against a red-team dataset.
 
-**Status: runs correctly locally via Docker Compose. Not deployed to any public URL.** See
-[Deployment](#17-docker-setup) for what "deployment-ready" does and doesn't mean here.
 
 ## Table of contents
 
